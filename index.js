@@ -44,7 +44,12 @@ async function run() {
         res.send(result)
     })
 
-
+    app.post('/allProducts',async (req,res)=>{
+        const singleToy=req.body;
+        console.log(singleToy)
+        const result=await toyCollection.insertOne(singleToy)
+        res.send(result)
+    })
 
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
