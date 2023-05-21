@@ -35,6 +35,14 @@ async function run() {
         res.send(result);
     })
 
+    app.get('/allProducts/:email',async(req,res)=>{
+        const email=req.params.email;
+        const query={
+            sellerEmail:email
+        }
+        const result= await toyCollection.find(query).toArray()
+        res.send(result)
+    })
 
 
 
