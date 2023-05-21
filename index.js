@@ -59,7 +59,7 @@ run().catch(console.dir);
 
 
 app.get('/',(req,res)=>{
-    res.send('Welcome to Toy  Marketplace server')
+    res.send('Welcome to Toy Cars server')
 })
 
 app.listen(port,()=>{
