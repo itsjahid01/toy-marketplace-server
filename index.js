@@ -30,8 +30,9 @@ async function run() {
 
     const toyCollection= client.db('toyCarsDb').collection('allToys');
 
-    app.get('/allProducts',(req,res)=>{
-        
+    app.get('/allProducts',async (req,res)=>{
+        const result =await toyCollection.find().toArray();
+        res.send(result);
     })
 
 
