@@ -37,30 +37,28 @@ async function run() {
 
     app.get('/allProducts/:email', async(req,res)=>{
         const email=req.params.email;
-        const query={ sellerEmail:email}
+        const query={ sellerEmail: email }
         const result= await toyCollection.find(query).toArray()
         res.send(result)
     })
 
-    app.get('/allProducts/:id', async(req,res)=>{
+    app.get('/toy/:id', async (req, res) => {
         const id=req.params.id;
         console.log(id)
-        const query={ _id: new ObjectId(id)}
+        const query={ _id : new ObjectId(id)}
         const result= await toyCollection.findOne(query)
         res.send(result)
     })
 
-
-    // app.get('/allProducts/:category', async(req,res)=>{
-    //     const category=req.params.category;
-    //     console.log(category)
-    //     const query={
-    //         subCategory:category
-    //     }
-    //     const result= await toyCollection.find(query).toArray()
-    //     res.send(result)
-    // })
-
+    app.get('/category/:category', async(req,res)=>{
+        const category=req.params.category;
+        console.log(category)
+        const query={
+            subCategory:category
+        }
+        const result= await toyCollection.find(query).toArray()
+        res.send(result)
+    })
 
     app.post('/allProducts',async (req,res)=>{
         const singleToy=req.body;
@@ -69,8 +67,16 @@ async function run() {
         res.send(result)
     })
 
+    app.delete('/allProducts/:id',async(req,res)=>{
+        const id =req.params.id
+        const query={ _id : new ObjectId(id)}
+        const result= await toyCollection.deleteOne(query)
+        res.send(result)
+    })
 
 
+
+    
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
     console.log("Pinged your deployment. You successfully connected to MongoDB!");
@@ -87,6 +93,6 @@ app.get('/',(req,res)=>{
     res.send('Welcome to Toy Cars server')
 })
 
-app.listen(port,()=>{
+app.listen(port, () => {
     console.log(`server is running on port ${port}`)
 })
