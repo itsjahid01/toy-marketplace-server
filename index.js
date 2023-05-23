@@ -27,6 +27,10 @@ async function run() {
 
     const toyCollection= client.db('toyCarsDb').collection('allToys');
 
+    // Sorting options
+    // const sortByPriceAsc = { price: 1 }; // Ascending order
+    // const sortByPriceDesc = { price: -1 }; // Descending order
+
     //---------------------- get api------------------------------
     app.get('/allProducts',async (req,res)=>{
         const result =await toyCollection.find().limit(20).toArray();
